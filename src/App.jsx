@@ -1,35 +1,108 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from "axios";
+import "./App.css";
+import { useRef, useState } from "react";
+import {
+  Button,
+  Container,
+  Stack,
+  TextField,
+  Box,
+  IconButton,
+} from "@mui/material";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export class AudioEntry {
+  constructor(text, audio, createdAt) {
+    this.text = text;
+    this.audio = audio;
+    this.createdAt = createdAt;
+  }
 }
 
-export default App
+const apiKey = import.meta.env.VITE_API_KEY;
+
+async function fetchAudio(t, setAudioEntries) {
+  console.log(t);
+  if (t.length < 2) {
+    alert("text too short");
+    return;
+  }
+  const xmlBodyStr = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female'
+  name='en-US-JennyNeural'>
+  ${t}
+  </voice></speak>`;
+  const res = await axios.post(
+    "https://eastus.tts.speech.microsoft.com/cognitiveservices/v1",
+    xmlBodyStr,
+    {
+      headers: {
+        "Ocp-Apim-Subscription-Key": `${apiKey}`,
+        "Content-Type": "application/ssml+xml",
+        "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+      },
+      // responseType: "stream",
+      responseType: "blob",
+    }
+  );
+  const bl = res.data;
+  const url = URL.createObjectURL(bl);
+
+  const ab = new Audio(url);
+
+  ab.play();
+  const data = res.data;
+  console.log(data);
+  setAudioEntries((audioEntries) => [
+    ...audioEntries,
+    new AudioEntry(t, ab, Date.now()),
+  ]);
+}
+
+function App() {
+  const tref = useRef();
+  const [audioEntries, setAudioEntries] = useState([]);
+  return (
+    <>
+      <Container>
+        <input
+          type="text"
+          ref={tref}
+          // inputRe={tref}
+          // id="outlined-basic"
+          // label="Enter some text"
+          // variant="outlined"
+        />
+        <br />
+        <br />
+
+        <Button
+          sx={{ mt: 3 }}
+          variant="contained"
+          onClick={() => fetchAudio(tref.current.value, setAudioEntries)}
+        >
+          Speak
+        </Button>
+      </Container>
+      <Container sx={{ mt: 3 }}>
+        {audioEntries.map((ae) => {
+          return (
+            <>
+              <Stack direction="row">
+                <IconButton
+                  onClick={() => {
+                    ae.audio.play();
+                  }}
+                >
+                  <PlayCircleIcon />
+                </IconButton>
+                <Box>{ae.text}</Box>{" "}
+              </Stack>
+            </>
+          );
+        })}
+      </Container>
+    </>
+  );
+}
+
+export default App;
