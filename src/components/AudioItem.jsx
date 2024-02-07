@@ -19,9 +19,10 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
         }}
         sx={{ mr: 0 }}
       >
-        <PlayCircleIcon sx={{ color: "green" }} />
+        <PlayCircleIcon sx={{ color: "green", fontSize: "40px" }} />
       </IconButton>
       <IconButton
+        size="large"
         sx={{ ml: -1 }}
         onClick={() => {
           setAudioEntries((entries) => [
@@ -30,10 +31,13 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
           ]);
         }}
       >
-        <DeleteIcon sx={{ color: "red" }} />
+        <DeleteIcon sx={{ color: "red", fontSize: "40px" }} />
       </IconButton>
       <Typography sx={{ borlder: "2px solid blue" }}>
         {audioEntry.text}
+      </Typography>
+      <Typography sx={{ borlder: "2px solid blue" }}>
+        {audioEntry.createdAt}
       </Typography>
     </Stack>
   );
