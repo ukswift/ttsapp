@@ -1,16 +1,8 @@
 import axios from "axios";
 import "./App.css";
 import { useRef, useState } from "react";
-import {
-  Button,
-  Container,
-  Stack,
-  TextField,
-  Box,
-  IconButton,
-} from "@mui/material";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-
+import { Button, Container, IconButton } from "@mui/material";
+import { AudioItem } from "./components/AudioItem";
 export class AudioEntry {
   constructor(text, audio, createdAt) {
     this.text = text;
@@ -84,19 +76,14 @@ function App() {
         </Button>
       </Container>
       <Container sx={{ mt: 3 }}>
-        {audioEntries.map((ae) => {
+        {audioEntries.map((audioEntry, index) => {
           return (
             <>
-              <Stack direction="row">
-                <IconButton
-                  onClick={() => {
-                    ae.audio.play();
-                  }}
-                >
-                  <PlayCircleIcon />
-                </IconButton>
-                <Box>{ae.text}</Box>{" "}
-              </Stack>
+              <AudioItem
+                index={index}
+                audioEntry={audioEntry}
+                setAudioEntries={setAudioEntries}
+              />
             </>
           );
         })}
