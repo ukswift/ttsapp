@@ -5,18 +5,17 @@ import { AudioItem } from "./AudioItem";
 
 export const AudioList = ({ audioEntries, setAudioEntries }) => {
   return (
-    <ol style={{ listStyleType: "none" }} reversed>
+    <Stack style={{ listStyleType: "none" }} direction={"column-reverse"}>
       {audioEntries.map((audioEntry, index) => {
         return (
-          <li>
-            <AudioItem
-              index={index}
-              audioEntry={audioEntry}
-              setAudioEntries={setAudioEntries}
-            />
-          </li>
+          <AudioItem
+            key={`audio-entry-${audioEntry.createdAt}`}
+            index={index}
+            audioEntry={audioEntry}
+            setAudioEntries={setAudioEntries}
+          />
         );
       })}
-    </ol>
+    </Stack>
   );
 };
