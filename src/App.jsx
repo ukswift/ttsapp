@@ -9,6 +9,8 @@ import { AudioList } from "./components/AudioList";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import LandingPage from "./LandingPage";
 import { Core } from "./components/Core";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
@@ -19,6 +21,7 @@ function App() {
     <>
       <ResponsiveAppBar style={{ position: "sticky" }} />
       <Box sx={{ mt: 4 }}>{x}</Box>
+      <ToastContainer position="bottom-center" />
     </>
   );
   // return isAuthenticated? <></>

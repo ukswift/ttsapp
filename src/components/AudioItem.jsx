@@ -1,6 +1,7 @@
 import { Stack, IconButton, Typography } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { toast } from "react-toastify";
 
 export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
   return (
@@ -29,6 +30,7 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
             ...entries.slice(0, index),
             ...entries.slice(index + 1),
           ]);
+          toast.success("Item deleted successfully");
         }}
       >
         <DeleteIcon sx={{ color: "red", fontSize: "40px" }} />
