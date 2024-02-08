@@ -18,11 +18,11 @@ function App() {
   console.log(useAuth0());
   const x = isAuthenticated ? <Core /> : <LandingPage />;
   return (
-    <>
+    <Box>
       <ResponsiveAppBar style={{ position: "sticky" }} />
       <Box sx={{ mt: 4 }}>{x}</Box>
       <ToastContainer position="bottom-center" />
-    </>
+    </Box>
   );
   // return isAuthenticated? <></>
   // return (

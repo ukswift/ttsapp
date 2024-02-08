@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Box, Container, Grid, Stack } from "@mui/material";
+import { Box, Container, Grid, Stack, TextField } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -57,47 +57,52 @@ async function fetchAudio(t, setAudioEntries, setLoading) {
 export const Core = () => {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
     useAuth0();
-  const tref = useRef();
+  const [text, setText] = useState("");
   const [audioEntries, setAudioEntries] = useState([]);
   const [loading, setLoading] = useState(false);
   if (isLoading) return <Box sx={{ mb: 4 }}>Loading...</Box>;
   return (
     <div>
       <Container>
-        <input
-          type="text"
-          ref={tref}
-          // inputRe={tref}
-          // id="outlined-basic"
-          // label="Enter some text"
-          // variant="outlined"
-        />
-        <br />
-        <br />
-        <LoadingButton
-          onClick={() =>
-            fetchAudio(tref.current.value, setAudioEntries, setLoading)
-          }
-          loading={loading}
-          loadingIndicator="Loading..."
-          variant="contained"
-          size="large"
+        <Grid
+          container
+          direction="column"
+          // justifyContent="center"
+          alignItems="center"
+          // sx={{ border: "2px solid red" }}
         >
-          <span> Speak </span>
-        </LoadingButton>
-        <br />
-        <br />
-
-        {/* <Button
-    sx={{ mt: 3 }}
-    variant="contained"
-    onClick={() =>
-      fetchAudio(tref.current.value, setAudioEntries, setLoading)
-    }
-  >
-    Speak
-    {loading ? "loading" : ""}
-  </Button> */}
+          <Grid item>
+            <TextField
+              type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              label="Enter some text"
+              variant="outlined"
+              sx={{
+                mt: 8,
+                minWidth: "60vw",
+              }}
+              InputProps={{
+                sx: {
+                  borderRadius: "20px",
+                  backgroundColor: "white",
+                },
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <LoadingButton
+              onClick={() => fetchAudio(text, setAudioEntries, setLoading)}
+              loading={loading}
+              loadingIndicator="Loading..."
+              variant="contained"
+              size="large"
+              sx={{ display: "block", mt: 4 }}
+            >
+              <span> Speak </span>
+            </LoadingButton>
+          </Grid>
+        </Grid>
       </Container>
       <Container sx={{ mt: 3 }}>
         <AudioList
