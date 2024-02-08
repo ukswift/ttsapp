@@ -7,9 +7,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import AudioFileIcon from "@mui/icons-material/AudioFile";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 
@@ -38,7 +37,7 @@ function NavBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AudioFileIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -55,10 +54,10 @@ function NavBar() {
               flexGrow: 1,
             }}
           >
-            LOGODesktop
+            AudioJournal
           </Typography>
 
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <AudioFileIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -75,15 +74,13 @@ function NavBar() {
               textDecoration: "none",
             }}
           >
-            LOGOphone
+            AudioJournal
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src={user?.picture} />
-              </IconButton>
-            </Tooltip>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar src={user?.picture} />
+            </IconButton>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

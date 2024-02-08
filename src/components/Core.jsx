@@ -82,8 +82,15 @@ export const Core = () => {
                 }}
                 InputProps={{
                   sx: {
+                    px: 3,
                     borderRadius: "20px",
                     backgroundColor: "white",
+                    fontSize: "3rem",
+                  },
+                }}
+                InputLabelProps={{
+                  sx: {
+                    fontSize: "1.5rem",
                   },
                 }}
               />
