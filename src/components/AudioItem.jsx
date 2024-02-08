@@ -35,12 +35,13 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
       >
         <DeleteIcon sx={{ color: "red", fontSize: "40px" }} />
       </IconButton>
-      <Typography sx={{ borlder: "2px solid blue" }}>
-        {audioEntry.text}
-      </Typography>
-      <Typography sx={{ borlder: "2px solid blue" }}>
-        {audioEntry.createdAt}
-      </Typography>
+      <Stack>
+        <Typography variant="body1">{audioEntry.text}</Typography>
+        <Typography variant="subtitle2">
+          {new Date(audioEntry.createdAt).toDateString()}
+          {/* {new Date(audioEntry.createdAt).toLocaleDateString()} */}
+        </Typography>
+      </Stack>
     </Stack>
   );
 };
