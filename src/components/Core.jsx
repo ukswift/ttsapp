@@ -38,17 +38,17 @@ async function fetchAudio(text, setAudioEntries, setLoading) {
       responseType: "blob",
     }
   );
-  const bl = res.data;
-  const url = URL.createObjectURL(bl);
+  const blob = res.data;
+  const url = URL.createObjectURL(blob);
 
-  const ab = new Audio(url);
+  const audioBlobObject = new Audio(url);
 
-  ab.play();
+  audioBlobObject.play();
   const data = res.data;
   console.log(data);
   setAudioEntries((audioEntries) => [
     ...audioEntries,
-    new AudioEntry(text, ab, Date.now()),
+    new AudioEntry(text, audioBlobObject, Date.now()),
   ]);
   setLoading(false);
 }
@@ -60,7 +60,7 @@ export const Core = () => {
   const [loading, setLoading] = useState(false);
   if (isLoading) return <Box sx={{ mb: 4 }}>Loading...</Box>;
   return (
-    <div>
+    <Box sx={{ mb: 18 }}>
       <Container>
         <form
           onSubmit={(e) => {
@@ -116,6 +116,6 @@ export const Core = () => {
           setAudioEntries={setAudioEntries}
         />
       </Container>
-    </div>
+    </Box>
   );
 };

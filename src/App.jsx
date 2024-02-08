@@ -7,6 +7,7 @@ import LandingPage from "./LandingPage";
 import { Core } from "./components/Core";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { isAuthenticated } = useAuth0();
@@ -16,6 +17,7 @@ const App = () => {
     <Box>
       <NavBar style={{ position: "sticky" }} />
       <Box sx={{ mt: 4 }}>{component}</Box>
+      <Footer />
       <ToastContainer position="bottom-center" />
     </Box>
   );
