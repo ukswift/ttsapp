@@ -157,13 +157,22 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
             ))} */}
-              <MenuItem
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
-              >
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
+              {isAuthenticated && (
+                <MenuItem
+                  onClick={() =>
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    })
+                  }
+                >
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+              )}
+              {!isAuthenticated && (
+                <MenuItem onClick={() => loginWithRedirect()}>
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>

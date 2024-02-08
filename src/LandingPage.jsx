@@ -5,6 +5,10 @@ import React from "react";
 function LandingPage() {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
     useAuth0();
+
+  if (isLoading) {
+    return <Box>Loading...</Box>;
+  }
   return (
     <Box>
       <Container>
