@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Grid, Stack } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -22,8 +22,8 @@ async function fetchAudio(t, setAudioEntries, setLoading) {
     return;
   }
   setLoading(true);
-  const xmlBodyStr = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female'
-  name='en-US-JennyNeural'>
+  const xmlBodyStr = `<speak version='1.0' xml:lang='hi-IN'><voice xml:lang='hi-IN' xml:gender='Female'
+  name='hi-IN-SwaraNeural'>
   ${t}
   </voice></speak>`;
   const res = await axios.post(
