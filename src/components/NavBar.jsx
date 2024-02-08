@@ -59,6 +59,7 @@ function NavBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              flexGrow: 1,
             }}
           >
             LOGODesktop
