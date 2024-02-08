@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function ResponsiveAppBar() {
+function NavBar() {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
     useAuth0();
   console.log(user?.picture, "pppppppppppp");
@@ -182,4 +182,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default NavBar;

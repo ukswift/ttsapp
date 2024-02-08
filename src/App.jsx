@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import { AudioList } from "./components/AudioList";
-import ResponsiveAppBar from "./components/ResponsiveAppBar";
+import NavBar from "./components/NavBar";
 import LandingPage from "./LandingPage";
 import { Core } from "./components/Core";
 import { ToastContainer, toast } from "react-toastify";
@@ -19,7 +19,7 @@ function App() {
   const x = isAuthenticated ? <Core /> : <LandingPage />;
   return (
     <Box>
-      <ResponsiveAppBar style={{ position: "sticky" }} />
+      <NavBar style={{ position: "sticky" }} />
       <Box sx={{ mt: 4 }}>{x}</Box>
       <ToastContainer position="bottom-center" />
     </Box>
