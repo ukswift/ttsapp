@@ -14,7 +14,6 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
           mb: 2,
           maxWidth: "70vw",
           minWidth: "40vw",
-          // mx: 37,
         }}
         alignItems="center"
       >
@@ -45,7 +44,6 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
             sx={{ fontSize: "0.7rem" }}
           >
             {new Date(audioEntry.createdAt).toDateString()}
-            {/* {new Date(audioEntry.createdAt).toLocaleDateString()} */}
           </Typography>
         </Stack>
         <IconButton

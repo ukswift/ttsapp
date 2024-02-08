@@ -1,13 +1,23 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
 function LandingPage() {
-  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
-    useAuth0();
+  const { isLoading, loginWithRedirect } = useAuth0();
 
   if (isLoading) {
-    return <Box>Loading...</Box>;
+    return (
+      <Stack direction="row" justifyContent="center">
+        <CircularProgress />
+      </Stack>
+    );
   }
   return (
     <Box>

@@ -1,39 +1,24 @@
-import axios from "axios";
 import "./App.css";
-import { useEffect, useRef, useState } from "react";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoadingButton from "@mui/lab/LoadingButton";
 
-import { AudioList } from "./components/AudioList";
 import NavBar from "./components/NavBar";
 import LandingPage from "./LandingPage";
 import { Core } from "./components/Core";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function App() {
-  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
-    useAuth0();
+const App = () => {
+  const { isAuthenticated } = useAuth0();
   console.log(useAuth0());
-  const x = isAuthenticated ? <Core /> : <LandingPage />;
+  const component = isAuthenticated ? <Core /> : <LandingPage />;
   return (
     <Box>
       <NavBar style={{ position: "sticky" }} />
-      <Box sx={{ mt: 4 }}>{x}</Box>
+      <Box sx={{ mt: 4 }}>{component}</Box>
       <ToastContainer position="bottom-center" />
     </Box>
   );
-  // return isAuthenticated? <></>
-  // return (
-  //   true && (
-  //     <>
-  //       <ResponsiveAppBar />
-  //       <LandingPage />
-  //       <Core />
-  //     </>
-  //   )
-  // );
-}
+};
 
 export default App;

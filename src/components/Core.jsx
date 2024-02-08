@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { Box, Container, Grid, Stack, TextField } from "@mui/material";
+import { useState } from "react";
+import { Box, Container, Grid, TextField } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -15,16 +15,16 @@ export class AudioEntry {
     this.createdAt = createdAt;
   }
 }
-async function fetchAudio(t, setAudioEntries, setLoading) {
-  console.log(t);
-  if (t.length < 2) {
+async function fetchAudio(text, setAudioEntries, setLoading) {
+  console.log(text);
+  if (text.length < 2) {
     alert("text too short");
     return;
   }
   setLoading(true);
   const xmlBodyStr = `<speak version='1.0' xml:lang='hi-IN'><voice xml:lang='hi-IN' xml:gender='Female'
   name='hi-IN-SwaraNeural'>
-  ${t}
+  ${text}
   </voice></speak>`;
   const res = await axios.post(
     "https://eastus.tts.speech.microsoft.com/cognitiveservices/v1",
@@ -35,7 +35,6 @@ async function fetchAudio(t, setAudioEntries, setLoading) {
         "Content-Type": "application/ssml+xml",
         "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
       },
-      // responseType: "stream",
       responseType: "blob",
     }
   );
@@ -49,14 +48,13 @@ async function fetchAudio(t, setAudioEntries, setLoading) {
   console.log(data);
   setAudioEntries((audioEntries) => [
     ...audioEntries,
-    new AudioEntry(t, ab, Date.now()),
+    new AudioEntry(text, ab, Date.now()),
   ]);
   setLoading(false);
 }
 
 export const Core = () => {
-  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
-    useAuth0();
+  const { isLoading } = useAuth0();
   const [text, setText] = useState("");
   const [audioEntries, setAudioEntries] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -70,13 +68,7 @@ export const Core = () => {
             fetchAudio(text, setAudioEntries, setLoading);
           }}
         >
-          <Grid
-            container
-            direction="column"
-            // justifyContent="center"
-            alignItems="center"
-            // sx={{ border: "2px solid red" }}
-          >
+          <Grid container direction="column" alignItems="center">
             <Grid item>
               <TextField
                 type="text"
@@ -98,7 +90,6 @@ export const Core = () => {
             </Grid>
             <Grid item>
               <LoadingButton
-                // onClick={() => fetchAudio(text, setAudioEntries, setLoading)}
                 type="submit"
                 loading={loading}
                 loadingIndicator="Loading..."
