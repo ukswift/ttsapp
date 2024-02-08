@@ -1,7 +1,8 @@
-import { Stack, IconButton, Typography, Box } from "@mui/material";
+import { Stack, IconButton, Typography } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "react-toastify";
+import Share from "./Share";
 
 export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
   return (
@@ -25,8 +26,8 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
         >
           <PlayCircleIcon sx={{ color: "green", fontSize: "40px" }} />
         </IconButton>
-
-        <Stack flexGrow={1} sx={{ ml: 2 }}>
+        <Share text={encodeURIComponent(audioEntry.text)} />
+        <Stack flexGrow={1} sx={{ ml: 1 }}>
           <Typography
             variant="body1"
             sx={{
