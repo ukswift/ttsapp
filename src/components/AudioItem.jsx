@@ -28,8 +28,22 @@ export const AudioItem = ({ index, audioEntry, setAudioEntries }) => {
         </IconButton>
 
         <Stack flexGrow={1} sx={{ ml: 2 }}>
-          <Typography variant="body1">{audioEntry.text}</Typography>
-          <Typography variant="subtitle2">
+          <Typography
+            variant="body1"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              maxWidth: "200px", // Adjust the maximum width as needed
+            }}
+          >
+            {audioEntry.text}
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            color="gray"
+            sx={{ fontSize: "0.7rem" }}
+          >
             {new Date(audioEntry.createdAt).toDateString()}
             {/* {new Date(audioEntry.createdAt).toLocaleDateString()} */}
           </Typography>
