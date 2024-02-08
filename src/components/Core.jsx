@@ -64,45 +64,53 @@ export const Core = () => {
   return (
     <div>
       <Container>
-        <Grid
-          container
-          direction="column"
-          // justifyContent="center"
-          alignItems="center"
-          // sx={{ border: "2px solid red" }}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            fetchAudio(text, setAudioEntries, setLoading);
+          }}
         >
-          <Grid item>
-            <TextField
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              label="Enter some text"
-              variant="outlined"
-              sx={{
-                mt: 8,
-                minWidth: "60vw",
-              }}
-              InputProps={{
-                sx: {
-                  borderRadius: "20px",
-                  backgroundColor: "white",
-                },
-              }}
-            />
+          <Grid
+            container
+            direction="column"
+            // justifyContent="center"
+            alignItems="center"
+            // sx={{ border: "2px solid red" }}
+          >
+            <Grid item>
+              <TextField
+                type="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                label="Enter some text"
+                variant="outlined"
+                sx={{
+                  mt: 8,
+                  minWidth: "60vw",
+                }}
+                InputProps={{
+                  sx: {
+                    borderRadius: "20px",
+                    backgroundColor: "white",
+                  },
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <LoadingButton
+                // onClick={() => fetchAudio(text, setAudioEntries, setLoading)}
+                type="submit"
+                loading={loading}
+                loadingIndicator="Loading..."
+                variant="contained"
+                size="large"
+                sx={{ display: "block", mt: 4 }}
+              >
+                <span> Speak </span>
+              </LoadingButton>
+            </Grid>
           </Grid>
-          <Grid item>
-            <LoadingButton
-              onClick={() => fetchAudio(text, setAudioEntries, setLoading)}
-              loading={loading}
-              loadingIndicator="Loading..."
-              variant="contained"
-              size="large"
-              sx={{ display: "block", mt: 4 }}
-            >
-              <span> Speak </span>
-            </LoadingButton>
-          </Grid>
-        </Grid>
+        </form>
       </Container>
       <Container sx={{ mt: 3 }}>
         <AudioList
