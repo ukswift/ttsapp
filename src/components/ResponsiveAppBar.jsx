@@ -157,7 +157,11 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
             ))} */}
-              <MenuItem onClick={logout}>
+              <MenuItem
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
