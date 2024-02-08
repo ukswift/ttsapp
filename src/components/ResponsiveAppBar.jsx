@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth0 } from "@auth0/auth0-react";
+import { toast } from "react-toastify";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -131,6 +132,7 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Typography>jkjk</Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar src={user?.picture} />
@@ -159,11 +161,12 @@ function ResponsiveAppBar() {
             ))} */}
               {isAuthenticated && (
                 <MenuItem
-                  onClick={() =>
+                  onClick={() => {
                     logout({
                       logoutParams: { returnTo: window.location.origin },
-                    })
-                  }
+                    });
+                    toast.success("Logout successful");
+                  }}
                 >
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
