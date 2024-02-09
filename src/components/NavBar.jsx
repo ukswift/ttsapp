@@ -68,9 +68,9 @@ function NavBar() {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              // fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              // letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -80,7 +80,9 @@ function NavBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Stack direction={"row"}>
-              <Typography sx={{ m: 1 }}>{user.name}</Typography>
+              {user?.given_name && (
+                <Typography sx={{ m: 1 }}>{user.given_name}</Typography>
+              )}
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar src={user?.picture} />
               </IconButton>
