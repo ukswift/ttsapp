@@ -53,10 +53,16 @@ const Footer = () => {
   return (
     <footer style={footerStyle}>
       <Container maxWidth="lg">
-        <Typography variant="body1" color="inherit">
-          Utkarsha Kousik
-        </Typography>
-        <Typography variant="body2" color="inherit">
+        <Link
+          variant="body1"
+          color="inherit"
+          sx={{ textDecoration: "none" }}
+          href="https://www.linkedin.com/in/utkarsha-kousik-267228216/"
+          target="_blank"
+        >
+          © Utkarsha Kousik
+        </Link>
+        <Typography variant="body2" color="inherit" sx={{ mt: 1 }}>
           <a
             style={{
               textDecoration: "none",

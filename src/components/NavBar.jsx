@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import { Stack } from "@mui/material";
 
 function NavBar() {
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -78,9 +79,12 @@ function NavBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar src={user?.picture} />
-            </IconButton>
+            <Stack direction={"row"}>
+              <Typography sx={{ m: 1 }}>{user.name}</Typography>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar src={user?.picture} />
+              </IconButton>
+            </Stack>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
