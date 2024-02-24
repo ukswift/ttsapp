@@ -22,8 +22,8 @@ async function fetchAudio(text, setAudioEntries, setLoading) {
     return;
   }
   setLoading(true);
-  const xmlBodyStr = `<speak version='1.0' xml:lang='hi-IN'><voice xml:lang='hi-IN' xml:gender='Female'
-  name='hi-IN-SwaraNeural'>
+  const xmlBodyStr = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female'
+  name='en-US-JennyNeural'>
   ${text}
   </voice></speak>`;
   const res = await axios.post(
